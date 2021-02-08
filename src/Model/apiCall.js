@@ -1,7 +1,4 @@
-    
-    
-    const axios =require('axios').default;
-    export default class ApiCall{
+  export default class ApiCall{
         constructor(){
            
         

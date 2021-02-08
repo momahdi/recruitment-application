@@ -1,9 +1,9 @@
 import logo from './logo.svg';
 import './App.css';
-import react, {Component} from "react";
+import  {Component} from "react";
 import ApiCall from './Model/apiCall';
-import FirstView from './view/firstView';
-const axios = require('axios').default;
+import FirstView from './View/firstView';
+
 
 
 
