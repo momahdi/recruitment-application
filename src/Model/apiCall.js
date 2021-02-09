@@ -20,8 +20,8 @@
       applicationPost({start,end,competence}){
         const body={
           startPeriod:start ,
-          competence:end, 
-          endPeriod:competence}
+          competence:competence, 
+          endPeriod:end}
         return this.apiCall(body)
         .then(response => console.log(response))
         .catch(error => console.log( error))

@@ -5,7 +5,7 @@ class FirstView extends Component{
 
 
     handleSubmit=(e)=>{
-        this.props.model.testAPI();
+        this.props.apiCall.testAPI();
     }
     render(){
         return(

@@ -3,7 +3,8 @@ import './App.css';
 import  {Component} from "react";
 import ApiCall from './Model/apiCall';
 import FirstView from './View/firstView';
-
+import Model from './Model/model'
+import Expertise from './Presenter/expertise'
 
 
 
@@ -11,15 +12,17 @@ class App extends Component{
   constructor(props){
     super(props);
       this.state={
-       model: new ApiCall()
+       apiCall: new ApiCall(),
+       model: new Model()
       }
   }
 
-
-
   render (){
     return(
-     <FirstView model={this.state.model}/>
+      <div>
+          <FirstView apiCall={this.state.apiCall}/>
+          <Expertise model={this.state.model} apiCall={this.state.apiCall}/>
+      </div>
     );
     
   }
