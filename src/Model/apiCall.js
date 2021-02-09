@@ -1,12 +1,13 @@
   export default class ApiCall{
         constructor(){
-           
-        
+
         }
     
-         apiCall(body) {
-          return  fetch('https://restapikth.herokuapp.com/posts', {
-            method: 'POST',
+
+
+         apiCallPost(body,Params) {
+          return  fetch('https://restapikth.herokuapp.com/'+Params, {
+            method:'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -14,15 +15,40 @@
         })
         .then(response => {return response;})
         .catch(error => console.log( error))
-    }
+        }
 
+        apiCallGet(Params) {
+          return  fetch('https://restapikth.herokuapp.com/'+Params, {
+            method:'GET'  ,
+            headers: {
+              'Content-Type': 'application/json',
+          },
+        })
+        .then(response => {return response.json()})
+        .catch(error => console.log( error))
+      }
+
+
+
+
+
+
+
+
+
+
+    testGET(){
+      return this.apiCallGet("posts")
+      .then(response => {return response})
+      .catch(error => console.log( error))
+    }
 
       applicationPost({start,end,competence}){
         const body={
           startPeriod:start ,
           competence:competence, 
           endPeriod:end}
-        return this.apiCall(body)
+        return this.apiCallPost(body,"posts")
         .then(response => console.log(response))
         .catch(error => console.log( error))
       }
@@ -32,7 +58,7 @@
           startPeriod:"nu funkar allt" ,
           competence:[{name:"testfg1",year:5}], 
           endPeriod:"testg1" }
-        return this.apiCall(body)
+        return this.apiCallPost(body,"posts")
         .then(response => console.log(response))
         .catch(error => console.log( error))
       }

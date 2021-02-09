@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import {ExpertiseView, AddExpertiseForm} from '../View/expertiseView';
+import {ExpertiseView, AddExpertiseForm} from '../Views/expertiseView';
 
 function Expertise({model,apiCall}){ 
     const [allExpertise, setExpertice] = useState(model.getAllExpertise());
