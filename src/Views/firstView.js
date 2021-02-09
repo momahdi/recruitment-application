@@ -18,7 +18,7 @@ class FirstView extends Component{
     render(){
         return(
             <div>
-            <button onClick={()=>this.handleSubmit()}>test</button>
+            <button onClick={()=>this.handleSubmit()}>Get DATABASE</button>
             <div>{this.state.response}</div>
             </div>
         )
