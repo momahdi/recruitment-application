@@ -15,10 +15,19 @@ function Expertise({model,apiCall}){
     //Ta bort: Modellen bestämmer om den vill läsa från localstorage eller inte.......
     useEffect(() => localStorage.setItem('formData', myExpertise));
 
+    //remove selected state when chosen?
+    const removeSelectedExpertise = e => {
+        const exp = allExpertise.filter(name => name !== e);
+        setExpertice(exp);
+    }
+
     return(
         <div>
-            <ExpertiseView myExpertise={myExpertise} removeExpertise={n => model.removeExpertise(n)} />
-            <AddExpertiseForm expertise={allExpertise} addExpertise={(t,y) => model.addExpertise(t,y)} done={() => apiCall.applicationPost({start: "Dag1", end: "Dag10", competence: myExpertise})} />
+            <ExpertiseView myExpertise={myExpertise} removeExpertise={n => {model.removeExpertise(n); setExpertice([...allExpertise, n])}} />
+            <AddExpertiseForm expertise={allExpertise} addExpertise={(t,y) => model.addExpertise(t,y)} 
+                done={() => apiCall.applicationPost({start: "Dag1", end: "Dag10", competence: myExpertise})}
+                removeOption={(name) => removeSelectedExpertise(name)}   
+            />
         </div>
     )
 }

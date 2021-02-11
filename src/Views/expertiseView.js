@@ -13,17 +13,17 @@ const ExpertiseView = ({myExpertise, removeExpertise}) => (
     </div>
 );
 
-const AddExpertiseForm = ({expertise, addExpertise, done}) => {
+const AddExpertiseForm = ({expertise, addExpertise, done, removeOption}) => {
     const [year, setYear] = React.useState(0);
     const [type, setType] = React.useState('');
     return (
         <div>
-            <input onChange={(event) => setYear(event.target.value)} />
+            <input type="number" min="0" placeholder="years of experience" onChange={(event) => setYear(event.target.value)} />
             <select onChange={(event) => setType(event.target.value)}>
                 <option>choose your expertise</option>
                 {expertise.map((k) => <option key={k}>{k}</option>)}
             </select>
-            <button onClick={() => addExpertise(type, year)}>add</button>
+            <button onClick={() => {addExpertise(type, year); removeOption(type)}}>add</button>
             <button onClick={() => done()}>done</button>
         </div>
     );
