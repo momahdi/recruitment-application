@@ -21,6 +21,7 @@ function Expertise({model,apiCall}){
         setExpertice(exp);
     }
 
+    //TODO add user fname, lname, date of birth and start/end period to API call
     return(
         <div>
             <ExpertiseView myExpertise={myExpertise} removeExpertise={n => {model.removeExpertise(n); setExpertice([...allExpertise, n])}} />
