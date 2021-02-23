@@ -1,7 +1,6 @@
 import React, {useState} from 'react'
 import {Field, Form, Formik, useField} from "formik";
 import {TextField, Button, Select, MenuItem} from "@material-ui/core";
-import DatePicker from "react-datepicker";
 import * as Yup from "yup"
 
 const Authentication = () => {

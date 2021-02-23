@@ -1,12 +1,12 @@
-import { useEffect, useState } from "react";
+import {useEffect, useState} from "react";
 import {ExpertiseView, AddExpertiseForm} from '../Views/expertiseView';
 
-function Expertise({model,apiCall}){ 
+function Expertise({model, apiCall}) {
     const [allExpertise, setExpertice] = useState(model.getAllExpertise());
-    useEffect(()=>setExpertice(model.getAllExpertise()), []);
+    useEffect(() => setExpertice(model.getAllExpertise()), []);
 
-    const [myExpertise, setMyExpertise]= useState(model.getExpertise());
-    useEffect(function(){ 
+    const [myExpertise, setMyExpertise] = useState(model.getExpertise());
+    useEffect(function () {
         return model.addObserver(function () {
             setMyExpertise(model.getExpertise());
         })
@@ -22,14 +22,22 @@ function Expertise({model,apiCall}){
     }
 
     //TODO add user fname, lname, date of birth and start/end period to API call
-    return(
+    return (
         <div>
-            <ExpertiseView myExpertise={myExpertise} removeExpertise={n => {model.removeExpertise(n); setExpertice([...allExpertise, n])}} />
-            <AddExpertiseForm expertise={allExpertise} addExpertise={(t,y) => model.addExpertise(t,y)} 
-                done={() => apiCall.applicationPost({start: "Dag1", end: "Dag10", competence: myExpertise})}
-                removeOption={(name) => removeSelectedExpertise(name)}   
+            <ExpertiseView myExpertise={myExpertise} removeExpertise={n => {
+                model.removeExpertise(n);
+                setExpertice([...allExpertise, n])
+            }}/>
+            <AddExpertiseForm expertise={allExpertise} addExpertise={(t, y) => model.addExpertise(t, y)}
+                              done={() => apiCall.applicationPost({
+                                  start: "Dag1",
+                                  end: "Dag10",
+                                  competence: myExpertise
+                              })}
+                              removeOption={(name) => removeSelectedExpertise(name)}
             />
         </div>
     )
 }
+
 export default Expertise;

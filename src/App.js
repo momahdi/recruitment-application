@@ -1,6 +1,6 @@
 import {Component} from "react";
 import './App.css';
-import {Route} from "react-router-dom"
+import { Route } from "react-router-dom"
 //models
 import ApiCall from './Model/apiCall';
 import Model from './Model/model'
@@ -10,6 +10,7 @@ import Expertise from './Presenter/expertise'
 import FirstView from './Views/firstView';
 import Authentication from "./Views/Authentication";
 import SignUpAdmin from "./Views/SignUpAdmin";
+import AdminApplications from "./Views/AdminApplications";
 
 
 class App extends Component {
@@ -38,6 +39,10 @@ class App extends Component {
                         <FirstView apiCall={this.state.apiCall}/>
                         <Expertise model={this.state.model} apiCall={this.state.apiCall}/>
                     </div>}
+                />
+                <Route
+                    exact path="/admin/applications"
+                    render={() => <AdminApplications apiCall={this.state.apiCall}/>}
                 />
 
             </div>
