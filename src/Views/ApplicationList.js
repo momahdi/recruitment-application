@@ -16,6 +16,7 @@ const ApplicationList = ({applications}) => {
                 <th>endP</th>
                 <th>date of birth</th>
                 <th>application made at</th>
+                <th>application status</th>
             </tr>
             </thead>
             <tbody>

@@ -1,7 +1,23 @@
 import {useEffect, useState} from "react";
 import {ExpertiseView, AddExpertiseForm} from '../Views/expertiseView';
+import {useSelector} from "react-redux";
 
 function Expertise({model, apiCall}) {
+    const isLoggedIn = useSelector(state => state.UserReducer.userInfo[0].isLoggedIn);
+    const role = useSelector(state => state.UserReducer.userInfo[0].role);
+
+    useEffect(()=>{
+        if( (role !== "client") || (isLoggedIn === false) )
+            window.location = "/"
+    }, [isLoggedIn, role])
+    useEffect(()=>{
+        if( (role !== "client") || (isLoggedIn === false) )
+            window.location = "/"
+    }, [])
+
+
+
+
     const [allExpertise, setExpertice] = useState(model.getAllExpertise());
     useEffect(() => setExpertice(model.getAllExpertise()), []);
 
@@ -24,18 +40,21 @@ function Expertise({model, apiCall}) {
     //TODO add user fname, lname, date of birth and start/end period to API call
     return (
         <div>
-            <ExpertiseView myExpertise={myExpertise} removeExpertise={n => {
-                model.removeExpertise(n);
-                setExpertice([...allExpertise, n])
-            }}/>
-            <AddExpertiseForm expertise={allExpertise} addExpertise={(t, y) => model.addExpertise(t, y)}
-                              done={() => apiCall.applicationPost({
-                                  start: "Dag1",
-                                  end: "Dag10",
-                                  competence: myExpertise
-                              })}
-                              removeOption={(name) => removeSelectedExpertise(name)}
-            />
+            {((role === "client") && (isLoggedIn === true)) ?
+                <div>
+                <ExpertiseView myExpertise={myExpertise} removeExpertise={n => {
+                    model.removeExpertise(n);
+                    setExpertice([...allExpertise, n])
+                }}/>
+                <AddExpertiseForm expertise={allExpertise} addExpertise={(t, y) => model.addExpertise(t, y)}
+                                  done={(info) => apiCall.applicationPost({
+                                      start: info.start,
+                                      end: info.end,
+                                      competence: myExpertise
+                                  })}
+                                  removeOption={(name) => removeSelectedExpertise(name)}
+                /></div>
+            :""}
         </div>
     )
 }

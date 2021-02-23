@@ -1,16 +1,18 @@
 import {Component} from "react";
 import './App.css';
 import { Route } from "react-router-dom"
+
 //models
 import ApiCall from './Model/apiCall';
 import Model from './Model/model'
+
 //presenter
 import Expertise from './Presenter/expertise'
 //views
-import FirstView from './Views/firstView';
 import Authentication from "./Views/Authentication";
 import SignUpAdmin from "./Views/SignUpAdmin";
 import AdminApplications from "./Views/AdminApplications";
+import Header from "./Views/Header";
 
 
 class App extends Component {
@@ -25,6 +27,9 @@ class App extends Component {
     render() {
         return (
             <div className="applicationApp">
+                <header className="recruitmentApp">
+                    <Header/>
+                </header>
                 <Route
                     exact path="/"
                     render={() => <Authentication/>}
@@ -35,10 +40,7 @@ class App extends Component {
                 />
                 <Route
                     exact path="/user/application"
-                    render={() => <div>
-                        <FirstView apiCall={this.state.apiCall}/>
-                        <Expertise model={this.state.model} apiCall={this.state.apiCall}/>
-                    </div>}
+                    render={() => <Expertise model={this.state.model} apiCall={this.state.apiCall}/>}
                 />
                 <Route
                     exact path="/admin/applications"

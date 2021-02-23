@@ -13,13 +13,10 @@
 .content-table{
 
     border-collapse: collapse;
-
     font-size: 0.9em;
     min-width: 400px;
-
     background-color: #ffffff;
     border-radius: 5px 5px 0 0;
-
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.46);
 
 }
