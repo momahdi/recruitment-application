@@ -54,14 +54,7 @@ const AdminApplications = ({apiCall}) => {
                                     'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
                              */
 
-                            const instance = axios.create({
-                                baseURL: "http://localhost:3001/",
-                                withCredentials: true,
-                                credentials: 'include',
-                                headers: {
-                                    'Content-Type': 'application/json',
-                                }
-                            });
+                            const instance = apiCall.apiAxios();
                             instance.get(param).then(r =>( setSubmitting(false), setResult(r.data),setResult(r.data)))
                         }}
                     >
