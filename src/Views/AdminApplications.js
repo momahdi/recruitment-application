@@ -49,6 +49,9 @@ const AdminApplications = ({apiCall}) => {
                                 .catch(error => console.log(error))
                                 old url: baseURL: "https://restapikth.herokuapp.com/",
                                 local: baseURL: "http://localhost:3001/",
+
+                                header: 'Access-Control-Allow-Origin' : '*',
+                                    'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
                              */
 
                             const instance = axios.create({
@@ -56,8 +59,7 @@ const AdminApplications = ({apiCall}) => {
                                 withCredentials: true,
                                 credentials: 'include',
                                 headers: {
-                                    'Access-Control-Allow-Origin' : '*',
-                                    'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+                                    'Content-Type': 'application/json',
                                 }
                             });
                             instance.get(param).then(r =>( setSubmitting(false), setResult(r.data),setResult(r.data)))

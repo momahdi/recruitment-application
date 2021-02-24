@@ -149,8 +149,7 @@ const Authentication = ({apiCall}) => {
                             withCredentials: true,
                             credentials: 'include',
                             headers: {
-                                'Access-Control-Allow-Origin' : '*',
-                                'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+                                'Content-Type': 'application/json',
                             }
                         });
                         instance.post('auth/login', {
