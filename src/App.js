@@ -7,7 +7,7 @@ import ApiCall from './Model/apiCall';
 import Model from './Model/model'
 
 //presenter
-import Expertise from './Presenter/expertise'
+import {Expertise} from './Views/Expertise'
 //views
 import Authentication from "./Views/Authentication";
 import SignUpAdmin from "./Views/SignUpAdmin";
