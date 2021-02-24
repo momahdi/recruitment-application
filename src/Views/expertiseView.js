@@ -1,4 +1,6 @@
-import React from 'react';
+import React, {useState} from 'react';
+import UserReducer from "../Model/Redux/Reducers/UserReducer";
+import {useSelector} from "react-redux";
 const ExpertiseView = ({myExpertise, removeExpertise}) => (
     <div>
         {myExpertise.map(e => 
@@ -16,10 +18,13 @@ const ExpertiseView = ({myExpertise, removeExpertise}) => (
 
 
 const AddExpertiseForm = ({expertise, addExpertise, done, removeOption}) => {
+
+    const userInfo = useSelector(state => state.UserReducer.userInfo)
+    console.log(userInfo)
     const handleSubmit = () => {
         let ans = window.confirm("Are you sure you want to submit your application?");
         if(ans === true){
-            done({start: start, end: end});
+            done({start: start, end: end, fname: userInfo.fname, lname: userInfo.lname, status: "unhandled", dateOfBorth:userInfo.dateOfBirth});
         }
     }
 

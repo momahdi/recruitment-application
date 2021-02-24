@@ -5,6 +5,11 @@ const ApplicationElement = ({item}) => {
     //TODO CHANGE {testing} to directly look inside item from api
     const testing = "unhandled";
 
+    //call api and update status
+    const updateStatus = (event) => {
+        console.log(event.target.value)
+    }
+
     return (
         <tr key={item.id}>
             <td>"first name here"</td>
@@ -18,7 +23,7 @@ const ApplicationElement = ({item}) => {
             <td>week {item.endPeriod}</td>
             <td>"date of birth here"</td>
             <td>{item.date}</td>
-            <td><select name="status" >
+            <td><select name="status" onChange={(event)=>{ updateStatus(event) }}>
 
                 {(testing === "unhandled")?
                     <option selected="selected" value="unhandled">unhandled</option>

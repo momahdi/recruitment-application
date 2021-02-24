@@ -32,7 +32,7 @@ class App extends Component {
                 </header>
                 <Route
                     exact path="/"
-                    render={() => <Authentication/>}
+                    render={() => <Authentication apiCall={this.state.apiCall}/>}
                 />
                 <Route
                     exact path="/admin/signup"

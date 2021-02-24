@@ -46,10 +46,14 @@ function Expertise({model, apiCall}) {
                     model.removeExpertise(n);
                     setExpertice([...allExpertise, n])
                 }}/>
-                <AddExpertiseForm expertise={allExpertise} addExpertise={(t, y) => model.addExpertise(t, y)}
+                <AddExpertiseForm expertise={allExpertise} addExpertise={(t, y) => model.addExpertise(t, y)}//TODO add fields: {fname: info.fname, lname: info.lname, dateOfBirth: info.dateOfBirth}
                                   done={(info) => apiCall.applicationPost({
                                       start: info.start,
                                       end: info.end,
+                                      dateOfBirth: info.dateOfBirth,
+                                      status: info.status,
+                                      fname: info.fname,
+                                      lname: info.lname,
                                       competence: myExpertise
                                   })}
                                   removeOption={(name) => removeSelectedExpertise(name)}

@@ -2,7 +2,7 @@ export const testing = () => {
 
 
     return (dispatch, getState) => {
-        dispatch({type:"LOG_IN_USER", role:"admin", fname:"seb", ename:"paz", dateOfBirth: "12-12-12"})
+        dispatch({type:"LOG_IN_USER", role:"admin", fname:"seb", lname:"paz", dateOfBirth: "12-12-12"})
     }
 }
 

@@ -8,6 +8,7 @@
          apiCallPost(body,Params) {
           return  fetch('https://restapikth.herokuapp.com/'+Params, {
             method:'POST',
+              credentials: 'same-origin',
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -19,7 +20,8 @@
 
         apiCallGet(Params) {
           return  fetch('https://restapikth.herokuapp.com/'+Params, {
-            method:'GET'  ,
+            method:'GET',
+              credentials: 'same-origin',
             headers: {
               'Content-Type': 'application/json',
           },

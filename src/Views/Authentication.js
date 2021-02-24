@@ -2,11 +2,12 @@ import React, {useEffect, useState} from 'react'
 import {Field, Form, Formik, useField} from "formik";
 import {TextField, Button, Select, MenuItem} from "@material-ui/core";
 import * as Yup from "yup"
-import {useDispatch, useSelector} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import UserReducer from "../Model/Redux/Reducers/UserReducer";
 import {testing} from "../Model/Redux/Actions/testLogInLocalStorage";
-
-const Authentication = () => {
+import ApiCall from "../Model/apiCall";
+import axios from "axios";
+const Authentication = ({apiCall}) => {
 
     //hooks
     const [authStatus, setAuthStatus] = useState("Sign up");
@@ -27,7 +28,7 @@ const Authentication = () => {
     }, [isLoggedIn])
 
 
-
+// let param = auth/login
 
     //custom Formik components
     const AuthTextField = ({
@@ -127,8 +128,48 @@ const Authentication = () => {
                             break;
                         }
                          */
+                        let obj = {email: "test@kth.se", password:"test"};
+                        let param = "auth/login";
+                        /*
+                        apiCall.apiCallPost(obj, param)
+                            .then(response => {console.log(response);apiCall.apiCallGet("posts").then(response => (console.log(response)))
+                                .catch(error => console.log(error)) })
+                            .catch(error => console.log( error))
 
-                        dispatch(testing());//testing remove this when the TODO above is done
+                         */
+                        /*
+                            withCredentials: true,
+                            credentials: 'same-origin',
+                            old url: baseURL: "https://restapikth.herokuapp.com/",
+                            local: baseURL: "http://localhost:3001/",
+
+                         */
+                        const instance = axios.create({
+                            baseURL: "https://restapikth.herokuapp.com/",
+                            withCredentials: true,
+                            credentials: 'include',
+                            headers: {
+                                'Access-Control-Allow-Origin' : '*',
+                                'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+                            }
+                        });
+                        instance.post('auth/login', {
+                            email: 'test@kth.se',
+                            password: 'test'
+                        })
+                            .then((response) => {
+                                console.log(response.headers["set-cookie"]);
+                                console.log(response)
+                                console.log(document.cookie)
+
+
+                                dispatch(testing())
+                               // instance.get("posts").then(r =>console.log(r) )
+                            }, (error) => {
+                                console.log(error);
+                            });
+
+                        //;//testing remove this when the TODO above is done
 
 
                         console.log("submit:", data);
@@ -211,5 +252,4 @@ const Authentication = () => {
         </div>
     )
 }
-//<button onClick={()=>{callAction()}}>test Action</button>
 export default Authentication;
