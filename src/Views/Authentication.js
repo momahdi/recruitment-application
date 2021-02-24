@@ -4,7 +4,7 @@ import {TextField, Button, Select, MenuItem} from "@material-ui/core";
 import * as Yup from "yup"
 import { useDispatch, useSelector } from "react-redux";
 import UserReducer from "../Model/Redux/Reducers/UserReducer";
-import {testing} from "../Model/Redux/Actions/testLogInLocalStorage";
+import {signUP, testing} from "../Model/Redux/Actions/testLogInLocalStorage";
 import ApiCall from "../Model/apiCall";
 import axios from "axios";
 const Authentication = ({apiCall}) => {
@@ -107,6 +107,7 @@ const Authentication = ({apiCall}) => {
                 ?<div>
                 <Formik
                     initialValues={{
+                        username: "",
                         email: "",
                         password: "",
                         firstName: "",
@@ -117,7 +118,7 @@ const Authentication = ({apiCall}) => {
                         setSubmitting(true);
                         resetForm();
                         //TODO uncomment this and use real actions with dispatch (call api from within actions)
-                        /*switch(authStatus){
+                       /*  switch(authStatus){
                             case "Login":
                             dispatch()//to action that handles login
                             break;
@@ -126,8 +127,8 @@ const Authentication = ({apiCall}) => {
                             break;
                             default:
                             break;
-                        }
-                         */
+                        } */
+                         
                         let obj = {email: "test@kth.se", password:"test"};
                         let param = "auth/login";
                         /*
@@ -144,22 +145,38 @@ const Authentication = ({apiCall}) => {
                             local: baseURL: "http://localhost:3001/",
 *headers
                          */
-                        const instance = apiCall.apiAxios();
-                        instance.post('auth/login', {
-                            email: 'test@kth.se',
-                            password: 'test'
-                        })
-                            .then((response) => {
-                                console.log(response.headers["set-cookie"]);
-                                console.log(response)
-                                console.log(document.cookie)
-                                dispatch(testing())
-                               // instance.get("posts").then(r =>console.log(r) )
-                            }, (error) => {
-                                console.log(error);
-                            });
+                        if(authStatus ==  "Sign up"){
+                            const instance = apiCall.apiAxios();
+                            console.log(data);
+                            debugger;
+                            instance.post('auth/register', {data})
+                                .then((response) => {
+                                    console.log(response.headers["set-cookie"]);
+                                    console.log(response)
+                                    console.log(document.cookie)
+                                    //dispatch(signUP(response))
+                                    const instance = apiCall.apiAxios();
+                                    instance.post('auth/login', {email: data.email, password: data.password})
+                                        .then((response1) => {
+                                            // console.log(response.headers["set-cookie"]);
+                                            console.log(response1)
+                                            // console.log(document.cookie)
+                                            dispatch(signUP(data))
+                                           // instance.get("posts").then(r =>console.log(r) )
+                                        }, (error) => {
+                                            console.log(error);
+                                        });
+                                   // instance.get("posts").then(r =>console.log(r) )
+                                }, (error) => {
+                                    console.log(error);
+                                });
+                        }
+                      else{
+                           dispatch(testing());
+                        } 
+                    
                         //;//testing remove this when the TODO above is done
-                        console.log("submit:", data);
+                        console.log("submit:", {data: data});
                         setSubmitting(false);
                     }}
 
@@ -184,6 +201,13 @@ const Authentication = ({apiCall}) => {
                                     type="password"
                                 />
                             </div>
+                            {(authStatus === "Sign up") ? <div>
+                                <AuthTextField
+                                    placeholder="Username"
+                                    name="username"
+                                    type="input"
+                                />
+                            </div> : ""}
                             {(authStatus === "Sign up") ? <div>
                                 <AuthTextField
                                     placeholder="First Name"

@@ -12,16 +12,20 @@ const ApplicationElement = ({item}) => {
 
     return (
         <tr key={item.id}>
-            <td>"first name here"</td>
-            <td>"last name here"</td>
+            <td>{item.firstName}</td>
+            <td>{item.lastName}</td>
             <td>{item.competence?.map(comp =>{
                 return(
                     <div>{comp.name} {comp.year} year(s)</div>
                 )
             })}</td>
-            <td>week {item.startPeriod}</td>
-            <td>week {item.endPeriod}</td>
-            <td>"date of birth here"</td>
+            <td>{item.startPeriod}</td>
+            <td>{item.endPeriod}</td>
+            <td>{item.dateOfBirth?.map(comp =>{
+                return(
+                    <div>{comp.year}-{comp.month}-{comp.day} </div>
+                )
+            })}</td>
             <td>{item.date}</td>
             <td><select name="status" onChange={(event)=>{ updateStatus(event) }}>
 

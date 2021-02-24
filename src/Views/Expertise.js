@@ -32,7 +32,7 @@ function Expertise({model, apiCall}) {
         const exp = allExpertise.filter(name => name !== e);
         setExpertice(exp);
     }
-
+    const instance = apiCall.apiAxios();
     //TODO add user fname, lname, date of birth and start/end period to API call
     return (
         <div>
@@ -43,13 +43,13 @@ function Expertise({model, apiCall}) {
                     setExpertice([...allExpertise, n])
                 }}/>
                 <AddExpertiseForm expertise={allExpertise} addExpertise={(t, y) => model.addExpertise(t, y)}//TODO add fields: {fname: info.fname, lname: info.lname, dateOfBirth: info.dateOfBirth}
-                                  done={(info) => apiCall.applicationPost({
-                                      start: info.start,
-                                      end: info.end,
+                                  done={(info) => instance.post('posts',{
+                                      startPeriod: info.start,
+                                      endPeriod: info.end,
                                       dateOfBirth: info.dateOfBirth,
-                                      status: info.status,
-                                      fname: info.fname,
-                                      lname: info.lname,
+                                      status: "unhandled",
+                                      firstName: info.fname,
+                                      lastName: info.lname,
                                       competence: myExpertise
                                   })}
                                   removeOption={(name) => removeSelectedExpertise(name)}
@@ -78,18 +78,20 @@ const ExpertiseView = ({myExpertise, removeExpertise}) => (
 const AddExpertiseForm = ({expertise, addExpertise, done, removeOption}) => {
 
     const userInfo = useSelector(state => state.UserReducer.userInfo)
-    console.log(userInfo)
+   console.log(userInfo)
     const handleSubmit = () => {
         let ans = window.confirm("Are you sure you want to submit your application?");
         if(ans === true){
-            done({start: start, end: end, fname: userInfo.fname, lname: userInfo.lname, status: "unhandled", dateOfBorth:userInfo.dateOfBirth});
+           //console.log(userInfo[0].dateOfBirth);
+           //debugger;
+            done({start: start, end: end, fname: userInfo[0].fname, lname: userInfo[0].lname, status: "unhandled", dateOfBirth:userInfo[0].dateOfBirth});
         }
     }
 
-    const [year, setYear] = React.useState(0);
-    const [type, setType] = React.useState('');
-    const [start, setStart] = React.useState("");
-    const [end, setEnd] = React.useState("");
+    const [year, setYear] = useState(0);
+    const [type, setType] = useState('');
+    const [start, setStart] = useState("");
+    const [end, setEnd] = useState("");
     return (
         <div>
             <input type="number" min="0" placeholder="years of experience" onChange={(event) => setYear(event.target.value)} />
@@ -101,9 +103,9 @@ const AddExpertiseForm = ({expertise, addExpertise, done, removeOption}) => {
 
             <div>
                 <br/>
-                <input type="number" min="0" placeholder="available start period" onChange={(event)=>{ setStart(event.target.value) }} />
-                <input type="number" min="0" placeholder="available end period" onChange={(event)=>{ setEnd(event.target.value) }}/>
-                <button onClick={() => handleSubmit()}>confirm and send application</button>
+                <input type="text" min="0" placeholder="available start period" onChange={(event)=>{ setStart(event.target.value) }} />
+                <input type="text" min="0" placeholder="available end period" onChange={(event)=>{ setEnd(event.target.value) }}/>
+                <button onClick={() => {handleSubmit();}}>confirm and send application</button>
             </div>
 
 

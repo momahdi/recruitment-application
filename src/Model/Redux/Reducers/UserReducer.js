@@ -42,7 +42,20 @@ const UserReducer = (state = initState, action) => {
 
             };
         case "SIGN_UP_USER":
-            return {userInfo: state};
+            return {
+
+                userInfo: [
+                    {
+                        isLoggedIn: true,
+                        role: action.role,
+                        fname: action.fname,
+                        lname: action.lname,
+                        dateOfBirth: action.dateOfBirth,
+                    }
+                ]
+
+            };
+            
         default:
             return state;
 
