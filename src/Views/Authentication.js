@@ -144,14 +144,7 @@ const Authentication = ({apiCall}) => {
                             local: baseURL: "http://localhost:3001/",
 *headers
                          */
-                        const instance = axios.create({
-                            baseURL: "http://localhost:3001/",
-                            withCredentials: true,
-                            credentials: 'include',
-                            headers: {
-                                'Content-Type': 'application/json',
-                            }
-                        });
+                        const instance = apiCall.apiAxios();
                         instance.post('auth/login', {
                             email: 'test@kth.se',
                             password: 'test'
@@ -160,20 +153,18 @@ const Authentication = ({apiCall}) => {
                                 console.log(response.headers["set-cookie"]);
                                 console.log(response)
                                 console.log(document.cookie)
-
-
                                 dispatch(testing())
                                // instance.get("posts").then(r =>console.log(r) )
                             }, (error) => {
                                 console.log(error);
                             });
-
                         //;//testing remove this when the TODO above is done
-
-
                         console.log("submit:", data);
                         setSubmitting(false);
                     }}
+
+
+                    
                     //validationSchema={AuthSchema}//TODO UNCOMMENT THIS TO GET VALIDATION BACK
 
                 >
