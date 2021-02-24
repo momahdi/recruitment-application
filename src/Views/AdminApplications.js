@@ -50,12 +50,12 @@ const AdminApplications = ({apiCall}) => {
                                 old url: baseURL: "https://restapikth.herokuapp.com/",
                                 local: baseURL: "http://localhost:3001/",
 
-                                header: 'Access-Control-Allow-Origin' : '*',
+                               header: 'Access-Control-Allow-Origin' : '*',
                                     'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
                              */
 
                             const instance = axios.create({
-                                baseURL: "https://restapikth.herokuapp.com/",
+                                baseURL: "http://localhost:3001/",
                                 withCredentials: true,
                                 credentials: 'include',
                                 headers: {
