@@ -37,6 +37,9 @@ const AdminApplications = ({apiCall}) => {
                         onSubmit={(data, {setSubmitting}) => {
                             setSubmitting(true);
                             let param = "posts"
+                            console.log(data.competences.length)
+                            console.log(data.competences[0])
+                            console.log(data.competences[1])
                             if (data.competences.length === 2) {
                                 param = "posts/competence/or=" + data.competences[0] + "&=" + data.competences[1];
                             } else if (data.competences.length === 1) {
@@ -54,6 +57,7 @@ const AdminApplications = ({apiCall}) => {
                                     'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
                              */
 
+                            console.log(param)
                             const instance = apiCall.apiAxios();
                             instance.get(param).then(r =>( setSubmitting(false), setResult(r.data),setResult(r.data)))
                         }}
