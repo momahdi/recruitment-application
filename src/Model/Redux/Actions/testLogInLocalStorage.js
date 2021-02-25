@@ -8,7 +8,7 @@ export const signUP = (user) => {
     console.log(user);
 
     return (dispatch, getState) => {
-        dispatch({type:"SIGN_UP_USER", role: "admin", fname: user.firstName, lname: user.lastName, dateOfBirth: user.dateOfBirth})
+        dispatch({type:"SIGN_UP_USER", role: "client", fname: user.firstName, lname: user.lastName, dateOfBirth: user.dateOfBirth})
     }
 }
 

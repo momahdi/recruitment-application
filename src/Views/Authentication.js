@@ -50,11 +50,11 @@ const Authentication = ({apiCall}) => {
     //yup schema
     const AuthSchema = Yup.object().shape({
         email: Yup.string()
-            .min(6, 'Too Short!')
+            .min(4, 'Too Short!')
             .required('Required')
             .email('Invalid email'),
         password: Yup.string()
-            .min(6, 'Too Short!')
+            .min(4, 'Too Short!')
             .required('Required'),
         firstName: (authStatus === "Login")
             ? Yup.string()
@@ -145,10 +145,10 @@ const Authentication = ({apiCall}) => {
                             local: baseURL: "http://localhost:3001/",
 *headers
                          */
-                        if(authStatus ==  "Sign up"){
+                        if(authStatus ===  "Sign up"){
                             const instance = apiCall.apiAxios();
                             console.log(data);
-                            debugger;
+
                             instance.post('auth/register', {data})
                                 .then((response) => {
                                     console.log(response.headers["set-cookie"]);
@@ -172,7 +172,20 @@ const Authentication = ({apiCall}) => {
                                 });
                         }
                       else{
-                           dispatch(testing());
+                            const instance = apiCall.apiAxios();
+                            console.log(data);
+
+                            instance.post('auth/login', {email: data.email, password: data.password})
+                                .then((response1) => {
+                                    // console.log(response.headers["set-cookie"]);
+                                    console.log(response1)
+                                    // console.log(document.cookie)
+                                    dispatch(testing())
+                                    // instance.get("posts").then(r =>console.log(r) )
+                                }, (error) => {
+                                    console.log(error);
+                                });
+
                         } 
                     
                         //;//testing remove this when the TODO above is done
@@ -182,7 +195,7 @@ const Authentication = ({apiCall}) => {
 
 
                     
-                    //validationSchema={AuthSchema}//TODO UNCOMMENT THIS TO GET VALIDATION BACK
+                    validationSchema={AuthSchema}
 
                 >
                     {({values, isSubmitting, resetForm, errors}) => (
